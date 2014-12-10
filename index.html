@@ -1,90 +1,85 @@
-<!--<html ng-app="countryApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Angular.js Example</title>
-    <script src="angular/angular.js"></script>
-    <script>
-      var countryApp = angular.module('countryApp', []);
-      countryApp.controller('CountryCtrl', function ($scope, $http){
-        $http.get('data.json').success(function(data) {
-          $scope.countries = data;
-        });
-      });
-    </script>
-  </head>
-  <body ng-controller="CountryCtrl">
-    <table>
-      <tr>
-        <th>Country</th>
-        <th>Population</th>
-      </tr>
-      <tr ng-repeat="country in countries">
-        <td>{{country.name}}</td>
-        <td>{{country.age}}</td>
-      </tr>
-    </table>
-  </body>
-</html>-->
 <html ng-app="dolphinApp">
-  <head>
-    <meta charset='UTF-8'>
-    <title>Assignment 9</title>
-    <script src="angular/angular.js"></script>
-    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
-    <script src="app.js"></script>
-   <link type="text/css" rel="stylesheet" href="style.css"></link>
-</head>
-<body>
-  <div ng-controller="AppCtrl">
-    <h2 id="maintitle">Study Particpant Records</h2>
-    <p>{{jsonData.data.length}} people are on record</p>
-    <table id="tblData">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Balance</th>
-          <th>Age</th>
-          <th>Eye Color</th>
-          <th>Gender</th>
-          <th>Company</th>
-          <th>E-Mail</th>
-          <th>Phone Number</th>
-          <th>Address</th>
-        </tr>
-      </thead>
-      <tbody ng-model="jsonData">
-        <!-- <tr ng-repeat="oneSubmit in jsonData.data.RECORDS | orderBy: sortField : sortDescending"> -->
-        <tr ng-repeat="oneSubmit in jsonData.data">
-          <td>{{oneSubmit.index}}</td>
-          <td>{{oneSubmit.name}}</td>
-          <td>{{oneSubmit.balance}}</td>
-          <td>{{oneSubmit.age}}</td>
-          <td>{{oneSubmit.eyeColor}}</td>
-          <td>{{oneSubmit.gender}}</td>
-          <td>{{oneSubmit.company}}</td>
-          <td>{{oneSubmit.email}}</td>
-          <td>{{oneSubmit.phone}}</td>
-          <td>{{oneSubmit.address}}</td>
-          <td class="remove-checkbox" value={{oneSubmit.index}}><input type="checkbox"/></td>
-        </tr>
-      </tbody>
-    </table>
-    <form class="remove-form" ng-submit="removeRecord()">
-      <input type="submit" value="Remove Selected"/>
-    </form>
-    <form class="add-form" ng-submit="addRecord()">
-      <label>Name</label><input type="text" ng-model="enteredName"/>
-      <label>Balance</label><input type="text" ng-model="enteredBalance"/>
-      <label>Age</label><input type="text" ng-model="enteredAge"/><br>
-      <label>Eye Color</label><input type="text" ng-model="enteredEyeColor"/>
-      <label>Gender</label><input type="text" ng-model="enteredGender"/>
-      <label>Company</label><input type="text" ng-model="enteredCompany"/><br>
-      <label>Email</label><input type="text" ng-model="enteredEmail"/>
-      <label>Phone</label><input type="text" ng-model="enteredPhone"/>
-      <label>Address</label><input type="text" ng-model="enteredAddress"/><br>
-      <input type="submit" value="Add Record"/>
-    </form>
-  </div>
-</body>
+    <head>
+        <meta charset='UTF-8'>
+        <!-- 
+            Dalton James, Dalton_James@student.uml.edu   
+            UMass Lowell Computer Science
+            Student in Jesse Heines GUI Programming I
+        
+            File: index.html
+            Created: 2014/12/10
+        
+            Description: A Page that generates a table based on a given JSON file 
+        
+        -->
+        <title>Assignment 9</title>
+        <script src="angular/angular.js"></script>
+        <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+        <script src="app.js"></script>
+        <link type="text/css" rel="stylesheet" href="css/style.css"></link>
+    </head>
+  
+    <body>
+        <!--define a controller for the page-->
+        <div ng-controller="AppCtrl">
+            <!--title for the table-->
+            <h2 id="maintitle">Study Particpant Records</h2>
+            <!--displays the number of people in the table-->
+            <p>{{jsonData.data.length}} people are on record</p>
+            <!--table to display the JSON-->
+            <table id="tblData">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Balance</th>
+                        <th>Age</th>
+                        <th>Eye Color</th>
+                        <th>Gender</th>
+                        <th>Company</th>
+                        <th>E-Mail</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <!--accesses the JSON and displays desired info-->
+                <tbody ng-model="jsonData">
+                    <tr ng-repeat="oneSubmit in jsonData.data">
+                        <td>{{oneSubmit.index}}</td>
+                        <td>{{oneSubmit.name}}</td>
+                        <td>{{oneSubmit.balance}}</td>
+                        <td>{{oneSubmit.age}}</td>
+                        <td>{{oneSubmit.eyeColor}}</td>
+                        <td>{{oneSubmit.gender}}</td>
+                        <td>{{oneSubmit.company}}</td>
+                        <td>{{oneSubmit.email}}</td>
+                        <td>{{oneSubmit.phone}}</td>
+                        <td>{{oneSubmit.address}}</td>
+                        <!--button to remove entries with box checked off-->
+                        <td class="remove-checkbox" value={{oneSubmit.index}}><input type="checkbox"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!--adds a button that can remove selected entries from the table -->
+            <form class="remove-form" ng-submit="removeRecord()">
+                <input type="submit" value="Remove Selected"/>
+            </form>
+
+            <!--a form to add new entries to the table -->            
+            <form class="add-form" ng-submit="addRecord()">
+                <!--has an input for each table field-->
+                <label>Name</label><input type="text" ng-model="enteredName"/>
+                <label>Balance</label><input type="text" ng-model="enteredBalance"/>
+                <label>Age</label><input type="text" ng-model="enteredAge"/><br>
+                <label>Eye Color</label><input type="text" ng-model="enteredEyeColor"/>
+                <label>Gender</label><input type="text" ng-model="enteredGender"/>
+                <label>Company</label><input type="text" ng-model="enteredCompany"/><br>
+                <label>Email</label><input type="text" ng-model="enteredEmail"/>
+                <label>Phone</label><input type="text" ng-model="enteredPhone"/>
+                <label>Address</label><input type="text" ng-model="enteredAddress"/><br>
+                <input type="submit" value="Add Record"/>
+            </form>
+        </div><!--end ng-controller="AppCtrl" -->
+    </body>
 </html>
